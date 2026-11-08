@@ -1,0 +1,30 @@
+{
+  "execution_timestamp": "2026-11-08T13:34:49.081174+00:00",
+  "execution_duration_seconds": 0.5,
+  "input_records": {
+    "reviews_count": 7991,
+    "products_count": 5027
+  },
+  "processed_records": {
+    "reviews_processed_count": 7991,
+    "products_processed_count": 5027,
+    "rejected_reviews": 0,
+    "rejected_products": 0
+  },
+  "quality_metrics": {
+    "validation_passed": true,
+    "exact_review_duplicates": 0,
+    "event_key_review_duplicates": 0
+  },
+  "sentiment_category_distribution": {
+    "positive": 6537,
+    "negative": 929,
+    "neutral": 525
+  },
+  "lexical_summary": {
+    "mean_word_count": 68.63,
+    "median_word_count": 35.0,
+    "mean_text_length": 373.55,
+    "verified_purchase_percentage": 77.25
+  }
+}

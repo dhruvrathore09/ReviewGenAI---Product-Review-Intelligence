@@ -1,0 +1,40 @@
+{
+  "execution_duration_seconds": 6.67,
+  "protocol": {
+    "feature_used": "cleaned_review_text",
+    "prohibited_features_excluded": [
+      "cleaned_review_title",
+      "review_title",
+      "star_rating",
+      "rating_category",
+      "review_id",
+      "product_id"
+    ],
+    "split_random_state": 2026,
+    "evaluation_protocol": "Model comparison on Validation set; single evaluation of winner on Holdout test set"
+  },
+  "experiment_a_binary": {
+    "total_samples": 7466,
+    "split_counts": {
+      "train": 5226,
+      "validation": 1120,
+      "holdout_test": 1120
+    },
+    "best_model": "Calibrated Linear SVM",
+    "validation_macro_f1": 0.821,
+    "holdout_test_macro_f1": 0.8008,
+    "holdout_test_accuracy": 0.9232
+  },
+  "experiment_b_three_class": {
+    "total_samples": 7991,
+    "split_counts": {
+      "train": 5593,
+      "validation": 1199,
+      "holdout_test": 1199
+    },
+    "best_model": "Logistic Regression (Balanced)",
+    "validation_macro_f1": 0.5943,
+    "holdout_test_macro_f1": 0.6114,
+    "holdout_test_accuracy": 0.8232
+  }
+}

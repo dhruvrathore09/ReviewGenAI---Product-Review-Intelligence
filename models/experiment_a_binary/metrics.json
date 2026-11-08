@@ -1,0 +1,266 @@
+{
+  "experiment_name": "Experiment A: Binary Classification",
+  "input_feature": "cleaned_review_text",
+  "class_names": [
+    "negative",
+    "positive"
+  ],
+  "split_counts": {
+    "train": 5226,
+    "validation": 1120,
+    "holdout_test": 1120
+  },
+  "best_model_name": "Calibrated Linear SVM",
+  "validation_macro_f1": 0.821,
+  "candidate_benchmarks": {
+    "Dummy Baseline": {
+      "validation_metrics": {
+        "accuracy": 0.8759,
+        "macro_f1": 0.4669,
+        "weighted_f1": 0.8179,
+        "macro_precision": 0.4379,
+        "macro_recall": 0.5,
+        "per_class": {
+          "negative": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1_score": 0.0,
+            "support": 139
+          },
+          "positive": {
+            "precision": 0.8759,
+            "recall": 1.0,
+            "f1_score": 0.9338,
+            "support": 981
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            139
+          ],
+          [
+            0,
+            981
+          ]
+        ]
+      }
+    },
+    "Multinomial Naive Bayes": {
+      "validation_metrics": {
+        "accuracy": 0.8911,
+        "macro_f1": 0.5797,
+        "weighted_f1": 0.8517,
+        "macro_precision": 0.9447,
+        "macro_recall": 0.5612,
+        "per_class": {
+          "negative": {
+            "precision": 1.0,
+            "recall": 0.1223,
+            "f1_score": 0.2179,
+            "support": 139
+          },
+          "positive": {
+            "precision": 0.8894,
+            "recall": 1.0,
+            "f1_score": 0.9415,
+            "support": 981
+          }
+        },
+        "confusion_matrix": [
+          [
+            17,
+            122
+          ],
+          [
+            0,
+            981
+          ]
+        ]
+      }
+    },
+    "Logistic Regression (Balanced)": {
+      "validation_metrics": {
+        "accuracy": 0.9143,
+        "macro_f1": 0.8203,
+        "weighted_f1": 0.918,
+        "macro_precision": 0.796,
+        "macro_recall": 0.8523,
+        "per_class": {
+          "negative": {
+            "precision": 0.6257,
+            "recall": 0.7698,
+            "f1_score": 0.6903,
+            "support": 139
+          },
+          "positive": {
+            "precision": 0.9663,
+            "recall": 0.9348,
+            "f1_score": 0.9503,
+            "support": 981
+          }
+        },
+        "confusion_matrix": [
+          [
+            107,
+            32
+          ],
+          [
+            64,
+            917
+          ]
+        ]
+      }
+    },
+    "Calibrated Linear SVM": {
+      "validation_metrics": {
+        "accuracy": 0.9313,
+        "macro_f1": 0.821,
+        "weighted_f1": 0.9266,
+        "macro_precision": 0.874,
+        "macro_recall": 0.7848,
+        "per_class": {
+          "negative": {
+            "precision": 0.8039,
+            "recall": 0.5899,
+            "f1_score": 0.6805,
+            "support": 139
+          },
+          "positive": {
+            "precision": 0.944,
+            "recall": 0.9796,
+            "f1_score": 0.9615,
+            "support": 981
+          }
+        },
+        "confusion_matrix": [
+          [
+            82,
+            57
+          ],
+          [
+            20,
+            961
+          ]
+        ]
+      }
+    }
+  },
+  "holdout_test_metrics": {
+    "accuracy": 0.9232,
+    "macro_f1": 0.8008,
+    "weighted_f1": 0.9179,
+    "macro_precision": 0.8519,
+    "macro_recall": 0.7663,
+    "per_class": {
+      "negative": {
+        "precision": 0.7647,
+        "recall": 0.5571,
+        "f1_score": 0.6446,
+        "support": 140
+      },
+      "positive": {
+        "precision": 0.9391,
+        "recall": 0.9755,
+        "f1_score": 0.957,
+        "support": 980
+      }
+    },
+    "confusion_matrix": [
+      [
+        78,
+        62
+      ],
+      [
+        24,
+        956
+      ]
+    ]
+  },
+  "slice_analysis": {
+    "verified_purchase": {
+      "Unverified Purchase": {
+        "sample_size": 263,
+        "macro_f1": 0.7817,
+        "accuracy": 0.962,
+        "weighted_f1": 0.9559,
+        "per_class": {
+          "negative": {
+            "precision": 0.875,
+            "recall": 0.4375,
+            "f1_score": 0.5833,
+            "support": 16
+          },
+          "positive": {
+            "precision": 0.9647,
+            "recall": 0.996,
+            "f1_score": 0.9801,
+            "support": 247
+          }
+        }
+      },
+      "Verified Purchase": {
+        "sample_size": 857,
+        "macro_f1": 0.8003,
+        "accuracy": 0.9113,
+        "weighted_f1": 0.9061,
+        "per_class": {
+          "negative": {
+            "precision": 0.7553,
+            "recall": 0.5726,
+            "f1_score": 0.6514,
+            "support": 124
+          },
+          "positive": {
+            "precision": 0.9305,
+            "recall": 0.9686,
+            "f1_score": 0.9492,
+            "support": 733
+          }
+        }
+      }
+    },
+    "review_length": {
+      "Long (>=30 words)": {
+        "sample_size": 618,
+        "macro_f1": 0.7851,
+        "accuracy": 0.911,
+        "weighted_f1": 0.9038,
+        "per_class": {
+          "negative": {
+            "precision": 0.7627,
+            "recall": 0.5233,
+            "f1_score": 0.6207,
+            "support": 86
+          },
+          "positive": {
+            "precision": 0.9267,
+            "recall": 0.9737,
+            "f1_score": 0.9496,
+            "support": 532
+          }
+        }
+      },
+      "Short (<30 words)": {
+        "sample_size": 502,
+        "macro_f1": 0.8231,
+        "accuracy": 0.9382,
+        "weighted_f1": 0.9351,
+        "per_class": {
+          "negative": {
+            "precision": 0.7674,
+            "recall": 0.6111,
+            "f1_score": 0.6804,
+            "support": 54
+          },
+          "positive": {
+            "precision": 0.9542,
+            "recall": 0.9777,
+            "f1_score": 0.9658,
+            "support": 448
+          }
+        }
+      }
+    }
+  }
+}

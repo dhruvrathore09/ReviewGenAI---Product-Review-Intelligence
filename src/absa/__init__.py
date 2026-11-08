@@ -1,0 +1,30 @@
+"""Aspect-Based Sentiment Analysis (ABSA) Package for Product Reviews."""
+
+__version__ = "1.0.0"
+
+from src.absa.config import (
+    ASPECT_BATTERY,
+    ASPECT_BUILD,
+    ASPECT_CATEGORIES,
+    ASPECT_DISPLAY,
+    ASPECT_PRICE,
+    ASPECT_SOUND,
+    SENTIMENT_NEGATIVE,
+    SENTIMENT_NEUTRAL,
+    SENTIMENT_POSITIVE,
+    SENTIMENT_UNCERTAIN,
+)
+
+__all__ = [
+    "ASPECT_BATTERY",
+    "ASPECT_SOUND",
+    "ASPECT_BUILD",
+    "ASPECT_DISPLAY",
+    "ASPECT_PRICE",
+    "ASPECT_CATEGORIES",
+    "SENTIMENT_POSITIVE",
+    "SENTIMENT_NEUTRAL",
+    "SENTIMENT_NEGATIVE",
+    "SENTIMENT_UNCERTAIN",
+]
+

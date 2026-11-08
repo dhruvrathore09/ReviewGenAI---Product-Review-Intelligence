@@ -1,0 +1,69 @@
+{
+  "validation": {
+    "overall_valid": true,
+    "reviews_validation": {
+      "dataset": "reviews",
+      "total_records": 7991,
+      "is_valid": true,
+      "violations_count": 0,
+      "violations": [],
+      "metrics": {
+        "empty_product_ids": 0,
+        "empty_review_texts": 0,
+        "invalid_star_ratings": 0,
+        "negative_helpful_votes": 0,
+        "orphaned_reviews": 0,
+        "date_timestamp_discrepancies": 0
+      }
+    },
+    "products_validation": {
+      "dataset": "products",
+      "total_records": 5027,
+      "is_valid": true,
+      "violations_count": 0,
+      "violations": [],
+      "metrics": {
+        "empty_product_ids": 0,
+        "duplicate_product_ids": 0,
+        "empty_product_names": 0,
+        "negative_prices": 0,
+        "invalid_product_ratings": 0,
+        "missing_prices": 1415
+      }
+    }
+  },
+  "duplicate_detection": {
+    "reviews_duplicates": {
+      "dataset": "reviews",
+      "total_reviews": 7991,
+      "exact_duplicates": {
+        "count": 0,
+        "samples": []
+      },
+      "event_key_duplicates": {
+        "fields": [
+          "product_id",
+          "user_id",
+          "review_timestamp"
+        ],
+        "count": 0,
+        "samples": []
+      },
+      "content_duplicates": {
+        "fields": [
+          "product_id",
+          "cleaned_review_text"
+        ],
+        "count": 0,
+        "note": "Common short phrases (e.g. 'Works great!') across different users are legitimate reviews.",
+        "samples": []
+      }
+    },
+    "products_duplicates": {
+      "dataset": "products",
+      "total_products": 5027,
+      "exact_duplicates_count": 0,
+      "product_id_duplicates_count": 0
+    }
+  }
+}

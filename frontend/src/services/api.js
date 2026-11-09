@@ -5,7 +5,7 @@ const isLocal = typeof window !== 'undefined' &&
   (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
 
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 
-  (isLocal ? 'http://localhost:8000/api' : 'https://reviewgenai-api.onrender.com/api');
+  (isLocal ? 'http://localhost:8000/api' : 'https://reviewgenai-product-review-intelligence.onrender.com/api');
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,

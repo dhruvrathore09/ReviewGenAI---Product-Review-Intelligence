@@ -276,16 +276,19 @@ export default function ReviewAnalytics() {
     let isMounted = true;
     setLoading(true);
 
-    Promise.all([
+    Promise.allSettled([
       api.getDashboardOverview(),
-      api.getAnalyticsHub().catch(() => null),
+      api.getAnalyticsHub(),
     ])
-      .then(([ov, hub]) => {
-        if (isMounted) {
-          setOverview(ov);
-          setHubData(hub);
-          setLoading(false);
+      .then(([ovRes, hubRes]) => {
+        if (!isMounted) return;
+        if (ovRes.status === 'fulfilled' && ovRes.value) {
+          setOverview(ovRes.value);
         }
+        if (hubRes.status === 'fulfilled' && hubRes.value) {
+          setHubData(hubRes.value);
+        }
+        setLoading(false);
       })
       .catch((err) => {
         if (isMounted) {

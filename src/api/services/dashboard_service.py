@@ -20,12 +20,20 @@ from src.api.services.product_service import ProductService
 from src.api.services.product_report_service import ProductReportService
 
 
+_CACHED_OVERVIEW: Optional[DashboardOverviewResponse] = None
+_CACHED_ANALYTICS_HUB: Optional[AnalyticsHubResponse] = None
+
+
 class DashboardService:
     """Encapsulates dashboard metrics and platform aggregate queries."""
 
     @staticmethod
     def get_overview(db: Session) -> DashboardOverviewResponse:
         """Compute platform-wide summary metrics for products, reviews, and ratings."""
+        global _CACHED_OVERVIEW
+        if _CACHED_OVERVIEW is not None:
+            return _CACHED_OVERVIEW
+
         # 1. Total products count
         total_products = db.scalar(select(func.count(Product.product_id))) or 0
 
@@ -337,7 +345,8 @@ class DashboardService:
             for r in brand_rows
         ]
 
-        return DashboardOverviewResponse(
+        global _CACHED_OVERVIEW
+        _CACHED_OVERVIEW = DashboardOverviewResponse(
             total_products=total_products,
             total_reviews=total_reviews,
             overall_average_review_rating=overall_avg,
@@ -347,10 +356,15 @@ class DashboardService:
             top_categories=top_categories,
             top_brands=top_brands,
         )
+        return _CACHED_OVERVIEW
 
     @classmethod
     def get_analytics_hub(cls, db: Session) -> AnalyticsHubResponse:
         """Compute enriched category benchmarks, head-to-head comparisons, and market defect radar."""
+        global _CACHED_ANALYTICS_HUB
+        if _CACHED_ANALYTICS_HUB is not None:
+            return _CACHED_ANALYTICS_HUB
+
         CATEGORIES_CONFIG = [
             (
                 "Smartphones & Mobiles",
@@ -619,11 +633,13 @@ class DashboardService:
             ),
         ]
 
-        return AnalyticsHubResponse(
+        global _CACHED_ANALYTICS_HUB
+        _CACHED_ANALYTICS_HUB = AnalyticsHubResponse(
             categories=categories_list,
             comparisons=comparisons_list,
             market_flaws=market_flaws,
         )
+        return _CACHED_ANALYTICS_HUB
 
     @classmethod
     def get_category_products(cls, db: Session, category: str, limit: int = 80) -> List[ComparatorProductItem]:

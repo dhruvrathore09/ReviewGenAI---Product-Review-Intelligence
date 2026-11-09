@@ -46,22 +46,11 @@ def create_app() -> FastAPI:
         lifespan=lifespan,
     )
 
-    # Configure CORS for local development and cloud deployments (Vercel, Render, Railway, Netlify)
-    cors_env = os.getenv("CORS_ORIGINS", "")
-    allowed_origins = [o.strip() for o in cors_env.split(",") if o.strip()]
-    origins = [
-        "http://localhost:3000",
-        "http://localhost:5173",
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:5173",
-        *allowed_origins,
-    ]
-
+    # Configure CORS universally for local development and cloud deployments (Vercel, Render)
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=origins if (origins and "*" not in origins) else ["*"],
-        allow_origin_regex=r"^https?://.*",
-        allow_credentials=True,
+        allow_origins=["*"],
+        allow_credentials=False,
         allow_methods=["*"],
         allow_headers=["*"],
     )

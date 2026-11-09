@@ -38,3 +38,4 @@ databases:
     databaseName: product_review_db
     user: reviewgenai_user
     plan: free
+

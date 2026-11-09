@@ -36,5 +36,5 @@ databases:
   # 3. PostgreSQL Managed Database
   - name: reviewgenai-db
     databaseName: product_review_db
-    user: postgres
+    user: reviewgenai_user
     plan: free

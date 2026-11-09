@@ -1,10 +1,15 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
+// Detect whether running locally or on a cloud host (e.g. Vercel, Render)
+const isLocal = typeof window !== 'undefined' && 
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 
+  (isLocal ? 'http://localhost:8000/api' : 'https://reviewgenai-api.onrender.com/api');
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 60000,
+  timeout: 60000, // 60s timeout to allow free cloud tier cold starts (Render/Neon)
   headers: {
     'Content-Type': 'application/json',
   },

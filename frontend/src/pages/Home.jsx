@@ -7,7 +7,7 @@ import {
   Navigation, Layers, ChevronDown, ChevronUp, Package, ArrowUpRight, Volume2,
   HardDrive, Tv, Plug
 } from 'lucide-react';
-import api from '../services/api';
+import api, { API_BASE_URL } from '../services/api';
 import StatCard from '../components/common/StatCard';
 
 export default function Home() {
@@ -219,7 +219,7 @@ export default function Home() {
             </div>
           ) : error ? (
             <div className="card" style={{ textAlign: 'center', color: 'var(--accent-terracotta)', padding: '24px' }}>
-              Could not connect to FastAPI analytics service. Please verify server status at http://localhost:8000.
+              Could not connect to backend service at <code style={{ background: 'rgba(0,0,0,0.06)', padding: '2px 6px', borderRadius: '4px' }}>{API_BASE_URL}</code>.
             </div>
           ) : overview ? (
             <div style={{

@@ -1,6 +1,9 @@
 """FastAPI application initialization and router configuration."""
 
 import logging
+import os
+import threading
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse, JSONResponse
@@ -10,8 +13,23 @@ from src.api.routes.products import router as products_router
 from src.api.routes.reviews import router as reviews_router
 from src.api.routes.dashboard import router as dashboard_router
 from src.api.routes.assistant import router as assistant_router
+from src.db.seed_all import seed_database
 
 logger = logging.getLogger(__name__)
+
+
+def background_seed():
+    try:
+        seed_database()
+    except Exception as e:
+        logger.warning("Auto-seed background job completed or skipped: %s", e)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Auto-seed blank databases in production
+    threading.Thread(target=background_seed, daemon=True).start()
+    yield
 
 
 def create_app() -> FastAPI:
@@ -25,19 +43,24 @@ def create_app() -> FastAPI:
         version="1.0.0",
         docs_url="/docs",
         redoc_url="/redoc",
+        lifespan=lifespan,
     )
 
-    # Configure CORS strictly for intended local frontend clients (React/Vite)
+    # Configure CORS for local development and cloud deployments (Vercel, Render, Railway, Netlify)
+    cors_env = os.getenv("CORS_ORIGINS", "")
+    allowed_origins = [o.strip() for o in cors_env.split(",") if o.strip()]
     origins = [
         "http://localhost:3000",
         "http://localhost:5173",
         "http://127.0.0.1:3000",
         "http://127.0.0.1:5173",
+        *allowed_origins,
     ]
 
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=origins,
+        allow_origins=origins if (origins and "*" not in origins) else ["*"],
+        allow_origin_regex=r"^https?://.*",
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
